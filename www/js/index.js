@@ -63,6 +63,9 @@ var app = {
         plugin.on('disable', app.onModeDisabled);
 
         modeBtn.onclick = app.onModeButtonClicked;
+        //plugin.setEnabled(!plugin.isEnabled());
+        cordova.plugins.backgroundMode.enable();
+        cordova.plugins.notification.badge.registerPermission();
 
         if (device.platform == 'Android') {
             silentBtn.onclick = app.onSilentButtonClicked;
@@ -82,13 +85,13 @@ var app = {
     // Enable or disable the backgroud mode
     onModeButtonClicked: function() {
         var plugin = cordova.plugins.backgroundMode;
-        plugin.setEnabled(!plugin.isEnabled());
+        
     },
     // Update CSS classes
     onModeEnabled: function() {
         var btn = document.getElementById('mode');
         app.setButtonClass(btn, true);
-        cordova.plugins.notification.badge.registerPermission();
+        
     },
     // Update CSS classes
     onModeDisabled: function() {
